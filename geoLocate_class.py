@@ -23,4 +23,4 @@ if __name__ == '__main__':
     location = "Techno Main Saltlake, Kolkata"
     dir = geoLocate(location)
     dir.fetchCoordinates()
-    # testing
+    # testing egegegegege
