@@ -1,7 +1,5 @@
 import requests
-import time
-import json
-import config
+import creds
 from pprint import pprint
 
 
@@ -11,16 +9,19 @@ class geoLocate:
         self.baseURL = "https://maps.googleapis.com/maps/api/geocode/json"
         self.params = {
             'address': self.location,
-            'key': config.api_key
+            'key': creds.api_key
         }
 
     def fetchCoordinates(self):
         self.data = requests.get(self.baseURL, params=self.params).json()
-        pprint(self.data)
+        # pprint(self.data)
+        x_coordinate = self.data['results'][0]['geometry']['location']['lat']
+        y_coordinate = self.data['results'][0]['geometry']['location']['lng']
+        return [x_coordinate, y_coordinate]
 
 
 if __name__ == '__main__':
     location = "Techno Main Saltlake, Kolkata"
     dir = geoLocate(location)
-    dir.fetchCoordinates()
-    # testing egegegegege
+    coordinates = dir.fetchCoordinates()
+    print(coordinates)
