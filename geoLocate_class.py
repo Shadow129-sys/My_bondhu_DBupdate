@@ -13,11 +13,12 @@ class geoLocate:
         }
 
     def fetchCoordinates(self):
-        self.data = requests.get(self.baseURL, params=self.params).json()
-        # pprint(self.data)
-        x_coordinate = self.data['results'][0]['geometry']['location']['lng']
-        y_coordinate = self.data['results'][0]['geometry']['location']['lat']
-        return [x_coordinate, y_coordinate]
-
-    def fetchCity(self):
-        pass
+        try:
+            self.data = requests.get(self.baseURL, params=self.params).json()
+            x_coordinate = self.data['results'][0]['geometry']['location']['lng']
+            y_coordinate = self.data['results'][0]['geometry']['location']['lat']
+            print(f"Coordinates found: {x_coordinate}, {y_coordinate}")
+            return [x_coordinate, y_coordinate]
+        except:
+            print("Error occured. Rate limmited/ API error")
+            return []
